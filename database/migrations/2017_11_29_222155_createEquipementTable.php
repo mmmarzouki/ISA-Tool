@@ -14,11 +14,11 @@ class CreateEquipementTable extends Migration
     public function up()
     {
         Schema::create('equipements',function(Blueprint $table){
-            $table->string('reference',50)->primary();
+            $table->increments('id');
+            $table->string('reference',50)->unique();
             $table->string('name',255);
             $table->string('type',255);
             $table->timestamps();
-
         });
     }
 
