@@ -18,6 +18,7 @@ class CreateTeamsTable extends Migration
            $table ->increments('id');
            $table ->string('name',255);
            $table ->integer('id_manager')->unsigned();
+           $table->string('role')->nullable();
            $table->timestamps();
 
         });
