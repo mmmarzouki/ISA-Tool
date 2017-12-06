@@ -15,8 +15,9 @@ class CreateToDoListsTable extends Migration
     {
         Schema::create('todo_lists',function (Blueprint $table){
             $table->increments('id');
-            $table->string('value',255) ;
-            $table->boolean('done',255) ;
+            $table->string('description',255) ;
+            $table->string('date',255) ;
+            $table->string('status',255) ;
             $table->integer('id_project')->unsigned();
             $table->timestamps();
         });

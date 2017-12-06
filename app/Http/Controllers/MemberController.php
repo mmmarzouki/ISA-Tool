@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class MemberController extends Controller
 {
     public function create($request){
-
         $validator =\Validator::make($request->all(),[
             'name'=>'required',
             'lastname'=>'required',
@@ -36,7 +35,6 @@ class MemberController extends Controller
         //return response
         return response()->created();
     }
-
     public function delete($request){
         $id=$request->get('id');
         if(is_null($id)){
@@ -49,7 +47,6 @@ class MemberController extends Controller
 
         return response()->deleted();
     }
-
     public function read($request){
         $id=$request->get('id');
         if(is_null($id)){
@@ -57,13 +54,11 @@ class MemberController extends Controller
             return response()->bad_request_exception();
         }
         $member=Member::find($id);
-        $myData=[];
-        foreach ($member as $key => $value){
-            $myData[$key]=$value;
+        if(is_null($member)){
+            return response()->bad_request_exception();
         }
-        return response()->api($data=$myData);
+        return response()->api($data=$member->getAttributes());
     }
-
     public function update($request){
         $id=$request->get('id');
         if(is_null($id)){
@@ -95,6 +90,13 @@ class MemberController extends Controller
         }
         $member->saveOrFail();
         //return response
-        return response()->created();
+        return response()->updated();
+    }
+    public function readAll($request){
+        $myData=[];
+        foreach (Member::all() as $member){
+            array_add($myData,$member->getAttribute('id'),$member->getAttributes());
+        }
+        return response()->api($data=$myData);
     }
 }
