@@ -14,6 +14,6 @@ class Member extends BaseModel
     }
 
     public function teams(){
-        return $this->belongsToMany('App\Team');
+        return $this->belongsToMany('App\Team','members_teams','id_member','id_team');
     }
 }

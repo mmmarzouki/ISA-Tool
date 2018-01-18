@@ -13,7 +13,7 @@ class Team extends BaseModel
     }
 
     public function members(){
-        return $this->belongsToMany('App\Member');
+        return $this->belongsToMany('App\Team','members_teams','id_team','id_member');
     }
 
     public function manager(){
@@ -21,6 +21,6 @@ class Team extends BaseModel
     }
 
     public function events(){
-        return $this->belongsToMany('App\Event');
+        return $this->belongsToMany('App\TeamEvent','teams_events','id_team','id_event');
     }
 }

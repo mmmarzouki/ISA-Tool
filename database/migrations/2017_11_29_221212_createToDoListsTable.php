@@ -17,7 +17,8 @@ class CreateToDoListsTable extends Migration
             $table->increments('id');
             $table->string('description',255) ;
             $table->string('date',255) ;
-            $table->string('status',255) ;
+            $table->string('status',255);
+            $table->string('deadLine',255) ;
             $table->integer('id_project')->unsigned();
             $table->timestamps();
         });

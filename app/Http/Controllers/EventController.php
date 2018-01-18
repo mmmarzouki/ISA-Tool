@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Event;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class EventController extends Controllers
 {
     public function create($request){
         $validator =\Validator::make($request->all(),[

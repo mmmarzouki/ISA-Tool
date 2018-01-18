@@ -12,6 +12,7 @@ class ToDoListController extends Controller
         $validator =\Validator::make($request->all(),[
             'value'=>'required',
             'done'=>'required',
+            'deadLine'=>'required',
             'id_project'=>'required|numeric'
         ]);
         if($validator->fails()){
@@ -42,5 +43,41 @@ class ToDoListController extends Controller
     }
     public function readAll($request){
 
+    }
+    public function update($request){
+        $id=$request->get('id');
+        if(is_null($id))
+            return response()->bad_request_exception();
+        $toDoList=ToDoList::find($id);
+        if(is_null($toDoList))
+            return response()->bad_request_exception();
+        $validator =\Validator::make($request->all(),[
+            'value'=>'required',
+            'done'=>'required',
+            'deadLine'=>'required',
+            'id_project'=>'required|numeric'
+        ]);
+        if($validator->fails()){
+            //return error
+            return response()->bad_request_exception();
+        }
+        foreach ($request->all() as $key => $value){
+            if(in_array($key,$$team->getColumns()) && ! is_null($value)){
+                $team->$key=$value;
+            }
+        }
+        $toDoList->saveOrFail();
+        //return response
+        return response()->updated();
+    }
+    public function delete($request){
+        $id=$request->get('id');
+        if(is_null($id))
+            return response()->bad_request_exception();
+        $toDoList=Team::find($id);
+        if(is_null($toDoList))
+            return response()->bad_request_exception();
+        $toDoList->delete();
+        return response()->deleted();
     }
 }

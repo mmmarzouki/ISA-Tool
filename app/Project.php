@@ -13,7 +13,7 @@ class Project extends BaseModel
     }
 
     public function reservations(){
-        return $this->belongsToMany('App\Reservations');
+        return $this->belongsToMany('App\Project','reservations_projects','id_project','id_reservation');
     }
 
     public function team(){
