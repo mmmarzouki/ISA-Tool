@@ -20,6 +20,7 @@ Route::post('/EquipementRead','EquipmentController@read')->name('readEquipement'
 Route::post('/EquipementUpdate','EquipmentController@update')->name('updateEquipement');/*done*/
 Route::post('/EquipementDelete','EquipmentController@delete')->name('deleteEquipement');/*done*/
 Route::post('/EquipementReadAll','EquipmentController@readAll')->name('readAllEquipement');/*done*/
+Route::post('/EquipementReadByTeam','EquipmentController@readByTeam')->name('readAllEquipement');
 
 //Event
 Route::post('/EventCreate','EventController@create')->name('createEvent');/*done*/
@@ -66,3 +67,4 @@ Route::post('/ToDoListRead','ToDoListController@read')->name('readToDoList');/*d
 Route::post('/ToDoListUpdate','ToDoListController@update')->name('updateToDoList');/**/
 Route::post('/ToDoListDelete','ToDoListController@delete')->name('deleteToDoList');/**/
 Route::post('/ToDoListReadAll','ToDoListController@readAll')->name('readAllToDoList');/*done*/
+Route::post('/ToDoListReadByProject','ToDoListController@readByProject')->name('readByProject');

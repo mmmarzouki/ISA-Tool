@@ -84,4 +84,22 @@ class ToDoListController extends Controller
         $toDoList->delete();
         return response()->deleted();
     }
+    public function readByProject(Request $request){
+        $id=$request->get('id');
+        if(is_null($id))
+            return response()->bad_exception_request();
+        $project=Project::find($id);
+        if(is_null($project))
+            return response()->bad_exception_request();
+        $toDoLists = ToDoList::all();
+        $myData=[];
+        foreach ($toDoLists as $toDoList){
+            if($toDoList->getAttribute('id_project')==$id){
+                $myData+=[$toDoList->getAttribute('id')=>$toDoList->getAttributes()];
+            }
+        }
+
+       return response()->api($data=$myData);
+
+    }
 }

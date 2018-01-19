@@ -90,4 +90,7 @@ class EquipmentController extends Controller
         //return response
         return response()->updated();
     }
+    public function readByTeam(Request $request){
+
+    }
 }

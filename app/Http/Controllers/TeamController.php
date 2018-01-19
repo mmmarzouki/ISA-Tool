@@ -32,17 +32,14 @@ class TeamController extends Controller
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
-        $team=Team::find($id);
+        $team = Team::with(["members","projects"])->find($id);
         if(is_null($team))
             return response()->bad_request_exception();
-        $myData=$team->getAttributes();
         //manager
         $manager=Member::find($team->getAttribute('id_manager'));
-        $myData+=['manager'=>$manager];
-        //projet
-        $projet=Project::find
-
-        return response()->api($data=$myData);
+        //$team+=['manager'=>$manager];
+        $team->manager=$manager;
+        return response()->api($data=$team);
     }
     public function readAll(Request $request){
         $myData=[];
