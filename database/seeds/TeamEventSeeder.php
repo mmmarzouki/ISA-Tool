@@ -12,7 +12,7 @@ class TeamEventSeeder extends Seeder
     public function run()
     {
         \DB::table('teams_events')->truncate();
-        DB::table('reservations')->insert([
+        DB::table('teams_events')->insert([
             'id_event' => 1,
             'id_team' => 1
         ]);

@@ -13,7 +13,7 @@ class ResponseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \Response::macro('api',function($message = 'Status Ok', $data = null) {
+        \Response::macro('api',function($data = null) {
             $to_return = ['code' => 200, 'data' => $data];
             return response()->json($to_return);
         });

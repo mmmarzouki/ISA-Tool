@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Event;
 use Illuminate\Http\Request;
 
-class EventController extends Controllers
+class EventController extends Controller
 {
-    public function create($request){
+    public function create(Request $request){
         $validator =\Validator::make($request->all(),[
             'date'=>'required',
             'name'=>'required',
@@ -26,7 +26,7 @@ class EventController extends Controllers
         //return response
         return response()->created();
     }
-    public function delete($request){
+    public function delete(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -36,7 +36,7 @@ class EventController extends Controllers
         $event->delete();
         return response()->deleted();
     }
-    public function update($request){
+    public function update(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -61,7 +61,7 @@ class EventController extends Controllers
         return response()->updated();
 
     }
-    public function read($request){
+    public function read(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -70,10 +70,10 @@ class EventController extends Controllers
             return response()->bad_request_exception();
         return response()->api($data=$event->getAttributes());
     }
-    public function readAll($request){
+    public function readAll(Request $request){
         $myData=[];
-        foreach(Event::all() as $equipment){
-            array_add($myData, $equipment->getAttributes());
+        foreach(Event::all() as $event){
+            $myData+=[$event->getAttribute('id')=>$event->getAttributes()];
         }
         return response()->api($data=$myData);
     }

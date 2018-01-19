@@ -11,11 +11,12 @@ class EquipmentSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('equipments')->truncate();
+        \DB::table('equipements')->truncate();
         for($i=0;$i<3;$i++) {
-            DB::table('equipments')->insert([
-                'date' => str_random(10),
-                'name' => str_random(10)
+            DB::table('equipements')->insert([
+                'reference' => str_random(10),
+                'name' => str_random(10),
+                'type' => str_random(10)
             ]);
         }
     }

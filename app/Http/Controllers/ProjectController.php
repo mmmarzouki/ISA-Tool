@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function read($request){
+    public function read(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -16,13 +16,14 @@ class ProjectController extends Controller
             return response()->bad_request_exception();
         return response()->api($data=$project->getAttributes());
     }
-    public function readAll($request){
+    public function readAll(Request $request){
         $myData=[];
         foreach (Project::all() as $project){
-            array_add($myData,$project->getAttributeValue('id'),$project->getAttributes());
+            $myData+=[$project->getAttributeValue('id')=>$project->getAttributes()];
         }
+        return response()->api($data=$myData);
     }
-    public function create($request){
+    public function create(Request $request){
         $validator =\Validator::make($request->all(),[
             'name'=>'required',
             'description'=>'required',
@@ -43,7 +44,7 @@ class ProjectController extends Controller
         //return response
         return response()->created();
     }
-    public function delete($request){
+    public function delete(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -53,7 +54,7 @@ class ProjectController extends Controller
         $project->delete();
         return response()->deleted();
     }
-    public function update($request){
+    public function update(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();

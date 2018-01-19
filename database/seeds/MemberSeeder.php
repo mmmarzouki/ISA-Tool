@@ -17,7 +17,7 @@ class MemberSeeder extends Seeder
                 'name' => str_random(10),
                 'lastname' => str_random(10),
                 'email' => str_random(10),
-                'passwd' => str_random(10),
+                'password' => str_random(10),
                 'github' => str_random(10),
                 'name' => str_random(10),
                 'inscriptionDate' => str_random(10),

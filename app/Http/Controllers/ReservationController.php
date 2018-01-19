@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
-    public function create($request){
+    public function create(Request $request){
         $validator =\Validator::make($request->all(),[
             'datedebut'=>'required',
             'datefin'=>'required',
@@ -30,7 +30,7 @@ class ReservationController extends Controller
         //return response
         return response()->created();
     }
-    public function read($request){
+    public function read(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -39,28 +39,30 @@ class ReservationController extends Controller
             return response()->bad_request_exception();
         return response()->api($data=$reservation->getAttributes());
     }
-    public function readAll($request){
+    public function readAll(Request $request){
         $myData=[];
         foreach (Reservation::all() as $reservation){
-            array_add($myData,$reservation->getAttribute('id'),$reservation->getAttributes());
+            $myData+=[$reservation->getAttribute('id')=>$reservation->getAttributes()];
         }
         return response()->api($data=$myData);
     }
-    public function delete($request){
+    public function delete(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
-        $reservation=Reservation::find('id');
+        $reservation=Reservation::find($id);
         if(is_null($reservation))
             return response()->bad_request_exception();
         $reservation->delete();
         return response()->deleted();
     }
-    public function update($request){
+    public function update(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
-        $reservation=Reservation::find('id');
+
+        $reservation=Reservation::find($id);
+
         if(is_null($reservation))
             return response()->bad_request_exception();
         $validator =\Validator::make($request->all(),[

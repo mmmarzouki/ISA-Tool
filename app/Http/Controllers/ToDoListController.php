@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class ToDoListController extends Controller
 {
-    public function create($request){
+    public function create(Request $request){
         $validator =\Validator::make($request->all(),[
-            'value'=>'required',
-            'done'=>'required',
+            'description'=>'required',
+            'status'=>'required',
             'deadLine'=>'required',
             'id_project'=>'required|numeric'
         ]);
@@ -29,7 +29,7 @@ class ToDoListController extends Controller
         //return response
         return response()->created();
     }
-    public function read($request){
+    public function read(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_exception_request();
@@ -41,10 +41,14 @@ class ToDoListController extends Controller
         array_add($myData,'project',$project);
         return response()->api($data=$myData);
     }
-    public function readAll($request){
-
+    public function readAll(Request $request){
+        $myData=[];
+        foreach (ToDoList::all() as $toDoList){
+            $myData+=[$toDoList->getAttribute('id')=>$toDoList->getAttributes()];
+        }
+        return response()->api($data=$myData);
     }
-    public function update($request){
+    public function update(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -52,8 +56,8 @@ class ToDoListController extends Controller
         if(is_null($toDoList))
             return response()->bad_request_exception();
         $validator =\Validator::make($request->all(),[
-            'value'=>'required',
-            'done'=>'required',
+            'description'=>'required',
+            'status'=>'required',
             'deadLine'=>'required',
             'id_project'=>'required|numeric'
         ]);
@@ -62,19 +66,19 @@ class ToDoListController extends Controller
             return response()->bad_request_exception();
         }
         foreach ($request->all() as $key => $value){
-            if(in_array($key,$$team->getColumns()) && ! is_null($value)){
-                $team->$key=$value;
+            if(in_array($key,$toDoList->getColumns()) && ! is_null($value)){
+                $toDoList->$key=$value;
             }
         }
         $toDoList->saveOrFail();
         //return response
         return response()->updated();
     }
-    public function delete($request){
+    public function delete(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
-        $toDoList=Team::find($id);
+        $toDoList=ToDoList::find($id);
         if(is_null($toDoList))
             return response()->bad_request_exception();
         $toDoList->delete();

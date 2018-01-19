@@ -7,9 +7,9 @@ use App\Equipement;
 
 class EquipmentController extends Controller
 {
-    public function create($request){
+    public function create(Request $request){
         $validator =\Validator::make($request->all(),[
-            'reference'=>'required|unique|alpha_num',
+            'reference'=>'required|alpha_num',
             'name'=>'required',
             'type'=>'required'
         ]);
@@ -17,7 +17,7 @@ class EquipmentController extends Controller
             //return error
             return response()->bad_request_exception();
         }
-        $equipment= new Equipment();
+        $equipment= new Equipement();
         foreach ($request->all() as $key => $value){
             if(in_array($key,$equipment->getColumns()) && ! is_null($value)){
                 $equipment->$key=$value;
@@ -27,25 +27,31 @@ class EquipmentController extends Controller
         //return response
         return response()->created();
     }
-    public function read($request){
-        $id=$request->get('id');
+    public function read(Request $request){
+        $id=$request->get('id');//var_dump($id);
         if(is_null($id)){
+            $s="id null";
+            dd($s);
             return response()->bad_request_exception();
         }
         $equipment=Equipement::find($id);
         if(is_null($equipment)){
+            $s="equipment null";
+            dd($s);
             return response()->bad_request_exception();
         }
-        return response()->api($data=$equipment->getAttributes());
+        //dd($equipment->getAttributes());
+        return response()->api($equipment->getAttributes());
     }
-    public function readAll($request){
+    public function readAll(Request $request){
         $myData=[];
         foreach(Equipement::all() as $equipment){
-            array_add($myData,$equipment->getAttribute('id'),$equipment->getAttributes());
+            //array_add($myData,$equipment->getAttribute('id'),$equipment->getAttributes());
+            $myData+=[$equipment->getAttribute('id')=>$equipment->getAttributes()];
         }
         return response()->api($data=$myData);
     }
-    public function delete($request){
+    public function delete(Request $request){
         $id=$request->get('id');
         if(is_null($id)){
             return response()->bad_request_exception();
@@ -57,7 +63,7 @@ class EquipmentController extends Controller
         $equipment->delete();
         return response()->deleted();
     }
-    public function update($request){
+    public function update(Request $request){
         $id=$request->get('id');
         if(is_null($id)){
             return response()->bad_request_exception();
@@ -67,7 +73,7 @@ class EquipmentController extends Controller
             return response()->bad_request_exception();
         }
         $validator =\Validator::make($request->all(),[
-            'reference'=>'required|unique|alpha_num',
+            'reference'=>'required|alpha_num',
             'name'=>'required',
             'type'=>'required'
         ]);

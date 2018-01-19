@@ -9,8 +9,8 @@ class CreateReservationsProjectsTable extends Migration
 {
     Schema::create('reservations_projects',function(Blueprint $table){
         $table->increments('id');
-        $table->integer('id_reservation')->unique();
-        $table->integer('id_projects')->unique();
+        $table->integer('id_reservation')->unsigned();
+        $table->integer('id_projects')->unsigned();
         $table->timestamps();
     });
 }

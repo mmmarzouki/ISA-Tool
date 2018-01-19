@@ -12,7 +12,7 @@ class ReservationProjectSeeder extends Seeder
     public function run()
     {
         \DB::table('reservations_projects')->truncate();
-        DB::table('reservations')->insert([
+        DB::table('reservations_projects')->insert([
             'id_reservation' => 1,
             'id_projects' => 1
         ]);

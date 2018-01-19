@@ -10,8 +10,8 @@ class CreateEquipmentsReservationsTable extends Migration
 {
     Schema::create('equipements_reservations',function(Blueprint $table){
         $table->increments('id');
-        $table->integer('id_reservation')->unique();
-        $table->integer('id_equipments')->unique();
+        $table->integer('id_reservation')->unsigned();
+        $table->integer('id_equipments')->unsigned();
         $table->timestamps();
     });
 }

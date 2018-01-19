@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Member;
+use App\Project;
 use App\Team;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
-    public function create($request){
+    public function create(Request $request){
         $validator =\Validator::make($request->all(),[
             'name'=>'required',
             'id_manager'=>'numeric|required'
@@ -19,7 +20,7 @@ class TeamController extends Controller
         }
         $team = new Team();
         foreach ($request->all() as $key => $value){
-            if(in_array($key,$$team->getColumns()) && ! is_null($value)){
+            if(in_array($key,$team->getColumns()) && ! is_null($value)){
                 $team->$key=$value;
             }
         }
@@ -27,7 +28,7 @@ class TeamController extends Controller
         //return response
         return response()->created();
     }
-    public function read($request){
+    public function read(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -35,21 +36,25 @@ class TeamController extends Controller
         if(is_null($team))
             return response()->bad_request_exception();
         $myData=$team->getAttributes();
+        //manager
         $manager=Member::find($team->getAttribute('id_manager'));
-        array_add($myData,'manager',$manager);
+        $myData+=['manager'=>$manager];
+        //projet
+        $projet=Project::find
+
         return response()->api($data=$myData);
     }
-    public function readAll($request){
+    public function readAll(Request $request){
         $myData=[];
         foreach (Team::all() as $team){
             $manager = Member::find($team->getAttribute('id_manager'));
             $teamData=$team->getAttributes();
-            array_add($teamData,'manager',$manager);
-            array_add($myData,$team->getAttribute('id'),$teamData);
+            $teamData+=['manager'=>$manager];
+            $myData+=[$team->getAttribute('id')=>$teamData];
         }
         return response()->api($data=$myData);
     }
-    public function update($request){
+    public function update(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();
@@ -65,7 +70,7 @@ class TeamController extends Controller
             return response()->bad_request_exception();
         }
         foreach ($request->all() as $key => $value){
-            if(in_array($key,$$team->getColumns()) && ! is_null($value)){
+            if(in_array($key,$team->getColumns()) && ! is_null($value)){
                 $team->$key=$value;
             }
         }
@@ -73,7 +78,7 @@ class TeamController extends Controller
         //return response
         return response()->updated();
     }
-    public function delete($request){
+    public function delete(Request $request){
         $id=$request->get('id');
         if(is_null($id))
             return response()->bad_request_exception();

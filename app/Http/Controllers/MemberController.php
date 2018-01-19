@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
-    public function create($request){
+    public function create(Request $request){
         $validator =\Validator::make($request->all(),[
             'name'=>'required',
             'lastname'=>'required',
             'email'=>'required|email',
-            'password'=>'required|confirmed',
+            'password'=>'required',
             'inscriptionDate'=>'required',
             'level'=>'required|numeric|between:1,5',
             'section'=>'required|alpha',
-            'phone'=>'required|digits|size:8'
+            'phone'=>'required|size:8'
         ]);
         if($validator->fails()){
             //return error
@@ -35,7 +35,7 @@ class MemberController extends Controller
         //return response
         return response()->created();
     }
-    public function delete($request){
+    public function delete(Request $request){
         $id=$request->get('id');
         if(is_null($id)){
             //error
@@ -47,7 +47,7 @@ class MemberController extends Controller
 
         return response()->deleted();
     }
-    public function read($request){
+    public function read(Request $request){
         $id=$request->get('id');
         if(is_null($id)){
             //error
@@ -59,7 +59,7 @@ class MemberController extends Controller
         }
         return response()->api($data=$member->getAttributes());
     }
-    public function update($request){
+    public function update(Request $request){
         $id=$request->get('id');
         if(is_null($id)){
             //error
@@ -69,11 +69,11 @@ class MemberController extends Controller
             'name'=>'required',
             'lastname'=>'required',
             'email'=>'required|email',
-            'password'=>'required|confirmed',
+            'password'=>'required',
             'inscriptionDate'=>'required',
             'level'=>'required|numeric|between:1,5',
             'section'=>'required|alpha',
-            'phone'=>'required|digits|size:8'
+            'phone'=>'required|size:8'
         ]);
         if($validator->fails()){
             //return error
@@ -92,10 +92,10 @@ class MemberController extends Controller
         //return response
         return response()->updated();
     }
-    public function readAll($request){
+    public function readAll(Request $request){
         $myData=[];
         foreach (Member::all() as $member){
-            array_add($myData,$member->getAttribute('id'),$member->getAttributes());
+            $myData+=[$member->getAttribute('id')=>$member->getAttributes()];
         }
         return response()->api($data=$myData);
     }

@@ -15,54 +15,54 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Equipments
-Route::get('/EquipementCreate','EquipmentController@create')->name('createEquipement');
-Route::get('/EquipementRead','EquipmentController@read')->name('readEquipement');
-Route::get('/EquipementUpdate','EquipmentController@update')->name('updateEquipement');
-Route::get('/EquipementDelete','EquipmentController@delete')->name('deleteEquipement');
-Route::get('/EquipementReadAll','EquipmentController@readAll')->name('readAllEquipement');
+Route::post('/EquipementCreate','EquipmentController@create')->name('createEquipement');/*done*/
+Route::post('/EquipementRead','EquipmentController@read')->name('readEquipement');  /*done*/
+Route::post('/EquipementUpdate','EquipmentController@update')->name('updateEquipement');/*done*/
+Route::post('/EquipementDelete','EquipmentController@delete')->name('deleteEquipement');/*done*/
+Route::post('/EquipementReadAll','EquipmentController@readAll')->name('readAllEquipement');/*done*/
 
 //Event
-Route::get('/EventCreate','EventController@create')->name('createEvent');
-Route::get('/EventRead','EventController@read')->name('readEvent');
-Route::get('/EventUpdate','EventController@update')->name('updateEvent');
-Route::get('/EventDelete','EventController@delete')->name('deleteEvent');
-Route::get('/EventReadAll','EventController@readAll')->name('readAllEvent');
+Route::post('/EventCreate','EventController@create')->name('createEvent');/*done*/
+Route::post('/EventRead','EventController@read')->name('readEvent');/*done*/
+Route::post('/EventUpdate','EventController@update')->name('updateEvent');/*done*/
+Route::post('/EventDelete','EventController@delete')->name('deleteEvent');/*done*/
+Route::post('/EventReadAll','EventController@readAll')->name('readAllEvent');/*done*/
 
 //Member
-Route::get('/MemberCreate','MemberController@create')->name('createMember');
-Route::get('/MemberRead','MemberController@read')->name('readMember');
-Route::get('/MemberUpdate','MemberController@update')->name('updateMember');
-Route::get('/MemberDelete','MemberController@delete')->name('deleteMember');
-Route::get('/MemberReadAll','MemberController@readAll')->name('readAllMember');
+Route::post('/MemberCreate','MemberController@create')->name('createMember');/*done*/
+Route::post('/MemberRead','MemberController@read')->name('readMember');/*done*/
+Route::post('/MemberUpdate','MemberController@update')->name('updateMember');/*done*/
+Route::post('/MemberDelete','MemberController@delete')->name('deleteMember');/*done*/
+Route::post('/MemberReadAll','MemberController@readAll')->name('readAllMember');/*done*/
 
 
 //Project
-Route::get('/ProjectCreate','ProjectController@create')->name('createProject');
-Route::get('/ProjectRead','ProjectController@read')->name('readProject');
-Route::get('/ProjectUpdate','ProjectController@update')->name('updateProject');
-Route::get('/ProjectDelete','ProjectController@delete')->name('deleteProject');
-Route::get('/ProjectReadAll','ProjectController@readAll')->name('readAllProject');
+Route::post('/ProjectCreate','ProjectController@create')->name('createProject');/*done*/
+Route::post('/ProjectRead','ProjectController@read')->name('readProject');/*done*/
+Route::post('/ProjectUpdate','ProjectController@update')->name('updateProject');/*done*/
+Route::post('/ProjectDelete','ProjectController@delete')->name('deleteProject');/*done*/
+Route::post('/ProjectReadAll','ProjectController@readAll')->name('readAllProject');/*done*/
 
 
 //Reservation
-Route::get('/ReservationCreate','ReservationController@create')->name('createReservation');
-Route::get('/ReservationRead','ReservationController@read')->name('readReservation');
-Route::get('/ReservationUpdate','ReservationController@update')->name('updateReservation');
-Route::get('/ReservationDelete','ReservationController@delete')->name('deleteReservation');
-Route::get('/ReservationReadAll','ReservationController@readAll')->name('readAllReservation');
+Route::post('/ReservationCreate','ReservationController@create')->name('createReservation');/*done*/
+Route::post('/ReservationRead','ReservationController@read')->name('readReservation');/*done*/
+Route::post('/ReservationUpdate','ReservationController@update')->name('updateReservation');/*done*/
+Route::post('/ReservationDelete','ReservationController@delete')->name('deleteReservation');/*done*/
+Route::post('/ReservationReadAll','ReservationController@readAll')->name('readAllReservation');/*done*/
 
 
 //Team
-Route::get('/TeamCreate','TeamController@create')->name('createTeam');
-Route::get('/TeamRead','TeamController@read')->name('readTeam');
-Route::get('/TeamUpdate','TeamController@update')->name('updateTeam');
-Route::get('/TeamDelete','TeamController@delete')->name('deleteTeam');
-Route::get('/TeamReadAll','TeamController@readAll')->name('readAllTeam');
+Route::post('/TeamCreate','TeamController@create')->name('createTeam');/*done*/
+Route::post('/TeamRead','TeamController@read')->name('readTeam'); /*done*/
+Route::post('/TeamUpdate','TeamController@update')->name('updateTeam');/*done*/
+Route::post('/TeamDelete','TeamController@delete')->name('deleteTeam');/*done*/
+Route::post('/TeamReadAll','TeamController@readAll')->name('readAllTeam');/*done*/
 
 
 //ToDoList
-Route::get('/ToDoListCreate','ToDoListController@create')->name('createToDoList');
-Route::get('/ToDoListRead','ToDoListController@read')->name('readToDoList');
-Route::get('/ToDoListUpdate','ToDoListController@update')->name('updateToDoList');
-Route::get('/ToDoListDelete','ToDoListController@delete')->name('deleteToDoList');
-Route::get('/ToDoListReadAll','ToDoListController@readAll')->name('readAllToDoList');
+Route::post('/ToDoListCreate','ToDoListController@create')->name('createToDoList');/**/
+Route::post('/ToDoListRead','ToDoListController@read')->name('readToDoList');/*done*/
+Route::post('/ToDoListUpdate','ToDoListController@update')->name('updateToDoList');/**/
+Route::post('/ToDoListDelete','ToDoListController@delete')->name('deleteToDoList');/**/
+Route::post('/ToDoListReadAll','ToDoListController@readAll')->name('readAllToDoList');/*done*/
